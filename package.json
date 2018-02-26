@@ -24,7 +24,8 @@
     "prebuild": "tsc",
     "dev": "concurrently \"tsc --pretty --watch\" \"node ./clients/server.js\"",
     "build": "next build",
-    "start": "next start"
+    "start": "next start",
+    "lint": "tslint --fix --project ./"
   },
   "devDependencies": {
     "@types/express": "^4.11.1",

@@ -44,7 +44,6 @@ class AddChannel extends React.Component<ChildProps<any, IMutateProps>, IOwnStat
     }
 
     private update = (e: React.MouseEvent<HTMLButtonElement>) => {
-        console.log("clicked");
         const { value } = this.state;
         this.props.mutate({
             variables: { name: value },

@@ -8,11 +8,11 @@ const ChannelsList: React.SFC<OptionProps<{}, any>> = (props) => {
     console.log(props.data);
     const { channels, error, loading } = props.data;
     if (error) {
-        return <h1>{error.message}</h1>
+        return <h1>{error.message}</h1>;
     }
 
     if (loading) {
-        return <h3>Loading...</h3>
+        return <h3>Loading...</h3>;
     }
 
     return (
@@ -21,7 +21,7 @@ const ChannelsList: React.SFC<OptionProps<{}, any>> = (props) => {
                 channels.map( (channel) => {
                     return (
                         <ChannelItem key={channel.id}>{channel.name}</ChannelItem>
-                    )
+                    );
                 })
             }
         </ul>
@@ -38,5 +38,3 @@ const query = gql`
 `;
 
 export default graphql(query)(ChannelsList);
-
-
