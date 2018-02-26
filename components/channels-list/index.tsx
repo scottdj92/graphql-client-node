@@ -3,6 +3,7 @@ import { graphql, OptionProps } from "react-apollo";
 import ChannelItem from "./channel-item";
 import gql from "graphql-tag";
 
+// NOTE: types here are kinda meh, need to figure out a solution
 const ChannelsList: React.SFC<OptionProps<{}, any>> = (props) => {
     console.log(props.data);
     const { channels, error, loading } = props.data;

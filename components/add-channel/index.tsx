@@ -2,18 +2,31 @@ import * as React from "react";
 import Input from "./input";
 import Button from "./channel-button";
 import gql from "graphql-tag";
-import { graphql } from "react-apollo";
+import { graphql, ChildProps, MutationOpts } from "react-apollo";
 
 interface IOwnState {
     value: string;
 }
 
-class AddChannel extends React.Component<{}, IOwnState> {
-    constructor(props) {
+interface IMutateProps {
+    name: string;
+}
+
+const mutate = gql`
+    mutation addChannel($name: String!) {
+        addChannel(name: $name) {
+            id
+            name
+        }
+    }
+`;
+
+class AddChannel extends React.Component<ChildProps<any, IMutateProps>, IOwnState> {
+    constructor (props) {
         super(props);
         this.state = {
-            value: ""
-        }
+            value: "",
+        };
     }
 
     public render () {
@@ -21,7 +34,7 @@ class AddChannel extends React.Component<{}, IOwnState> {
         return (
             <>
                 <Input onChange={this.store} value={value} type="text"/>
-                <Button onClick={this.update}>update me bitch</Button>
+                <Button onClick={this.update}>update me</Button>
             </>
         );
     }
@@ -33,9 +46,13 @@ class AddChannel extends React.Component<{}, IOwnState> {
     private update = (e: React.MouseEvent<HTMLButtonElement>) => {
         console.log("clicked");
         const { value } = this.state;
-        const mutate = gql`
-            addChannel(name: ${value})
-        `;
+        this.props.mutate({
+            variables: { name: value },
+        }).then( (response) => {
+            console.log(response);
+        }).catch( (error) => {
+            console.log(error);
+        });
     }
 }
 
