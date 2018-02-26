@@ -7,5 +7,5 @@ const handler = appRoutes.getRequestHandler(app);
 
 const express = Express();
 app.prepare().then( () => {
-    express.use(handler).listen(8080);
+    express.use(handler).listen(3000);
 });
